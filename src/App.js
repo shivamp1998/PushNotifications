@@ -19,7 +19,7 @@ function App() {
   const sendNotification = async () => {
     setShow(true);
    let body = {
-      to: token,
+      to: "eTpsn1PUkgCGBciUpyaX6R:APA91bFUJBXyUjlxLQ2vxMapNRH927lw6z3Js_7wHWx3Q22jDKZeF6XtoRXnrHVMJh3dMiJ0uEibPPlAJYJnGwvhUMHq6Wzv3RLGLdD56MD3zkD5LL8KGzUjAvQCxHlHDh7BPvMbJMAV",
       notification : {
         title: 'This is a test notification',
         body: 'this is a test message'
