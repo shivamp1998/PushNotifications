@@ -27,23 +27,33 @@ function App() {
   
   const sendNotification = async () => {
     setShow(true);
-   let body = {
-      to: token,
-      notification : {
-        title: 'This is a test notification',
-        body: 'this is a test message'
-      }
-    }
-    let options = {
-      method: "POST",
-      headers : new Headers({
-        "Authorization": "key=AAAAh7DNuuQ:APA91bEcZ5Cz_zWuuOPBptXsMMvPBOH2e5YS998Lwmvf6bKjDOdZY93-Uvr1qwCz0xyuL7eg7Ir9lrxux7BNBLOaLeQfK5iVW6FQ4viygK-C9hsIu9-rMbz8D_SEq5CWiNaXSNtOFC2b",
-        "Content-Type" : "application/json"
-      }),
-      body: JSON.stringify(body)
-    }
-    await fetch('https://fcm.googleapis.com/fcm/send', options).then( res=> {console.log("SENT")}).catch(err => console.log(err));
-    console.log(body);
+   
+    const tokenref = firebase.database().ref("tokens");
+    tokenref.on('value', (snapshot) => {
+        const userToken = snapshot.val();
+        for( let id in userToken) {
+
+          let body = {
+            to:  userToken[id].value,
+            notification : {
+              title: 'This is a test notification',
+              body: 'this is a test message'
+            }
+          }
+          let options = {
+            method: "POST",
+            headers : new Headers({
+              "Authorization": "key=AAAAh7DNuuQ:APA91bEcZ5Cz_zWuuOPBptXsMMvPBOH2e5YS998Lwmvf6bKjDOdZY93-Uvr1qwCz0xyuL7eg7Ir9lrxux7BNBLOaLeQfK5iVW6FQ4viygK-C9hsIu9-rMbz8D_SEq5CWiNaXSNtOFC2b",
+              "Content-Type" : "application/json"
+            }),
+            body: JSON.stringify(body)
+          }
+           fetch('https://fcm.googleapis.com/fcm/send', options).then( res=> {console.log("SENT")}).catch(err => console.log(err));
+         
+        }
+    })
+    
+    
   }
   
   const [title,setTitle] = useState('');
