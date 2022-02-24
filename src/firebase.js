@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/messaging';
+import 'firebase/compat/database'
 
 const firebaseConfig = {
     apiKey: "AIzaSyC8hP1L-E0nWZH8WMRhQqH5rV02jmDLYNw",
@@ -11,6 +12,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 
 export default firebase;

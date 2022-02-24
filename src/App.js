@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import firebase from './firebase';
 import {useEffect, useState} from 'react';
-import Display from './Display/display'
+import Display from './Display/display';
 
 function App() {
   const messaging = firebase.messaging();
@@ -11,15 +11,23 @@ function App() {
     Notification.requestPermission().then( async (permission) => {
       if(permission === 'granted') {
         token = await messaging.getToken({vapidKey: "BMayH_z8vqDBTEF7A8kE8eiaWf-te8sKZjqk3ESeJy0gQM-AzbGMHTU9d0qNS_ddCL5-gXw36FJ53c4_WxnoroU"});
+        const tokenref = firebase.database().ref('tokens');
+        const userToken = {
+          value: token
+        }
+        tokenref.push(userToken)
+
       }
     }).catch(err => console.log(err));
-    console.log(token);
+    
+    
   }
+  
   
   const sendNotification = async () => {
     setShow(true);
    let body = {
-      to: "eTpsn1PUkgCGBciUpyaX6R:APA91bFUJBXyUjlxLQ2vxMapNRH927lw6z3Js_7wHWx3Q22jDKZeF6XtoRXnrHVMJh3dMiJ0uEibPPlAJYJnGwvhUMHq6Wzv3RLGLdD56MD3zkD5LL8KGzUjAvQCxHlHDh7BPvMbJMAV",
+      to: token,
       notification : {
         title: 'This is a test notification',
         body: 'this is a test message'
@@ -46,7 +54,6 @@ function App() {
   })
   const [show,setShow] = useState(false);
   
- 
 
 
   return (
