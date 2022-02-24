@@ -16,6 +16,7 @@ function App() {
           value: token
         }
         tokenref.push(userToken)
+        console.log('Data Saved Success fully');
 
       }
     }).catch(err => console.log(err));
