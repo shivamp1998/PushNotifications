@@ -17,17 +17,17 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-// messaging.onBackgroundMessage((payload) => {
-//     console.log("Recieved Background Message", payload);
-//     const notificationTitle = payload.notification.title;
-//     const notificationOptions = {
-//         body: payload.notification.body,
-//         icon: '/logo192.png'
-//     };
-//     this.registration.showNotification(
-//         notificationTitle,
-//         notificationOptions
-//     );
-// })
+messaging.onBackgroundMessage((payload) => {
+    console.log("Recieved Background Message", payload);
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+        body: payload.notification.body,
+        icon: '/logo192.png'
+    };
+    this.registration.showNotification(
+        notificationTitle,
+        notificationOptions
+    );
+})
 
 
