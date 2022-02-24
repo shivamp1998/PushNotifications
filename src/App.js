@@ -15,7 +15,27 @@ function App() {
         const userToken = {
           value: token
         }
-        tokenref.push(userToken)
+        
+        tokenref.on('value', snapshot => {
+          const tokenStore = snapshot.val();
+          if (tokenStore === null){
+            tokenref.push(userToken);
+          }
+          let flag = false;
+          for (let id in tokenStore){
+            console.log(tokenStore[id].value);
+            if(tokenStore[id].value === userToken.value){
+              flag = true;
+            }
+            
+          }
+          if(flag === false) {
+            tokenref.push(userToken);
+          }else{
+            console.log("User token already added!");
+          }
+        })
+        // tokenref.push(userToken)
         console.log('Data Saved Success fully');
 
       }
@@ -23,6 +43,8 @@ function App() {
     
     
   }
+
+
   
   
   const sendNotification = async () => {
