@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/messaging';
 import 'firebase/compat/database'
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyC8hP1L-E0nWZH8WMRhQqH5rV02jmDLYNw",
     authDomain: "push-notifications-20f90.firebaseapp.com",
@@ -15,5 +16,5 @@ const firebaseConfig = {
 
 
 firebase.initializeApp(firebaseConfig);
-
+console.log(firebaseConfig);
 export default firebase;

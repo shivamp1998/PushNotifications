@@ -10,7 +10,7 @@ function App() {
   const onSubscribe = () => {
     Notification.requestPermission().then( async (permission) => {
       if(permission === 'granted') {
-        token = await messaging.getToken({vapidKey: "BMayH_z8vqDBTEF7A8kE8eiaWf-te8sKZjqk3ESeJy0gQM-AzbGMHTU9d0qNS_ddCL5-gXw36FJ53c4_WxnoroU"});
+        token = await messaging.getToken({vapidKey: " "});
         const tokenref = firebase.database().ref('tokens');
         const userToken = {
           value: token
